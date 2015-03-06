@@ -2,7 +2,50 @@
 
 h1, h2, h3, h4, h5, h6 {
   font-family: 'Open Sans', sans-serif;
+  font-size: 20px;
 }
+
+h1 {
+    margin-left: -1.2rem;
+    font-size: 2rem;
+    color: #3275b3;
+}
+
+h2 {
+    margin-left: -0.7rem;
+    font-size: 1.6rem;
+    color: #3275b3;
+}
+
+h3 {
+    font-size: 1.25rem;
+    color: #466b8c;
+}
+
+h4 {
+    font-size: 1rem;
+    color: #377851;
+    font-style: italic;
+}
+
+h5 {
+    font-size: 1rem;
+    color: #327045;
+}
+
+p {
+    margin-bottom: 0.5rem;
+}
+
+ul {
+    margin-left: 1.5rem;
+}
+
+code {
+    margin-left: 1rem;
+}
+
+#page-title:
 
 code {
   font-weight: normal;
