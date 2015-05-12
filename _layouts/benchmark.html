@@ -1,0 +1,54 @@
+---
+layout: docpage
+navgroup: community
+---
+
+<script type="text/javascript" src="https://www.google.com/jsapi"></script>
+<script type="text/javascript">
+  runScripts.push (function () {
+    google.load("visualization", "1", {packages:["corechart"]});
+    google.setOnLoadCallback(function () {
+      $.getScript ("/docs/about-mono/performance/utils.js")
+        .fail (function (a, b, c, d) {
+          error ("Utils file not found");
+        })
+        .done (function () {
+          $.get ("http://storage.bos.xamarin.com/benchmarker/graphs/mono/{{ page.architecture }}/{{ page.title }}.json")
+            .fail (function (data) {
+              $("#errormessage").html ("Data file not found");
+            })
+            .done (function (data) {
+              $.eachasync (Object.keys (data).slice (0).sort (countersort), 33, function (counter) {
+                if (counter === "Time") {
+                  drawLineChart (data, "Time", "time-chart");
+                } else {
+                  var slug = slugify (counter);
+
+                  $(document.getElementById ("counters-chart-container")).append ("<div id=\"" + slug + "-chart-container\"><div id=\"" + slug + "-chart\" style=\"width:100%;height:200px\"></div></div>");
+
+                  drawLineChart (data, counter, slug + "-chart");
+                }
+              });
+            });
+        });
+      });
+    });
+</script>
+
+<div class="row">
+  <div class="small-12 columns">
+    <h1 id="benchmark-{{ page.title }}">Benchmark: "{{ page.title }}"</h1>
+
+    <span id="errormessage"></span>
+
+    <h3 id="wall-clock-time">Wall clock time</h3>
+    <div id="time-chart-container">
+      <div id="time-chart" style="width:100%;height:200px"></div>
+    </div>
+      
+    <hr/>
+    <h3 id="counters">Counters</h3>
+    <div id="counters-chart-container">
+    </div>
+  </div>
+</div>

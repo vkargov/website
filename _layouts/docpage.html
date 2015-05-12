@@ -38,10 +38,10 @@ layout: base
 </div>
 
 <script>
-function runScripts() {
+runScripts.push (function () {
   addHeadingAnchorChar();
   addToc();
-}
+});
 
 function addHeadingAnchorChar() {
   // add anchor char to each heading, for easier linking

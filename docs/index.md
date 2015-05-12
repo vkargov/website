@@ -37,6 +37,7 @@ About Mono
  - [Roadmap](/docs/about-mono/roadmap/) and [Plans](/docs/about-mono/plans/)
  - [Vulnerabilities](/docs/about-mono/vulnerabilities/)
  - Showcase: [Screenshots](/docs/about-mono/showcase/screenshots/), [Software](/docs/about-mono/showcase/software/), [Companies using Mono](/docs/about-mono/showcase/companies-using-mono/), [Mono Logos](/docs/about-mono/logos/)
+ - [Performance](/docs/about-mono/performance/): performance evolution of the mono project on different platforms
 
 Compiling Mono
 --------------

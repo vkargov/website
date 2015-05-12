@@ -28,6 +28,7 @@
       ga('create', 'UA-76510-1', 'auto');
       ga('send', 'pageview');
     </script>
+    <script>runScripts = []</script>
   </head>
   <body>
     <div id="main-wrapper">
@@ -101,8 +102,10 @@
 
     <script>
       // allow sub pages to run custom code
-      if (typeof runScripts == 'function') {
-        runScripts();
+      for (var i = 0; i < runScripts.length; ++i) {
+        if (typeof runScripts[i] == 'function') {
+          runScripts[i]();
+        }
       }
 
       $(document).foundation();
