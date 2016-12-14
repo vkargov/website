@@ -1,0 +1,7 @@
+  /Users/vkargov/work/website/docs/dev:
+  total used in directory 16 available 6213857
+  drwxr-xr-x   5 vkargov  staff   170 Dec 13 18:02 .
+  drwxr-xr-x  14 vkargov  staff   476 Dec 13 18:02 ..
+  drwxr-xr-x   3 vkargov  staff   102 Dec 13 18:02 perf
+D -rw-r--r--   1 vkargov  staff  2603 Dec 13 17:59 perf-fillbuff.md
+  -rw-r--r--   1 vkargov  staff  2603 Dec 13 17:59 perf.md
