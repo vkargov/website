@@ -196,4 +196,17 @@ Our website is open source on [GitHub](https://github.com/mono/website). If you 
             </ul>
         </div>
     </dd>
+
+   <dd class="accordion-navigation">
+        <a class="panel" href="#developer-information"><h2>Information for Mono developers</h2></a>
+        <div id="developer-information" class="content panel ">
+            <ul class="disc">
+                <li><a href="/docs/dev/perf/">Performance analysis of the runtime</a>
+					<ul>
+						<li><a href="/docs/dev/perf/fillbuff">SHA1CryptoServiceProvider:FillBuff</a></li>
+					</ul>
+				</li>
+            </ul>
+        </div>
+    </dd>
 </dl>
