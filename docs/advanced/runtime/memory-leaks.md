@@ -69,6 +69,59 @@ we can quickly deduce that `g_free (aot_name);` was missing.
 * Apple developer [documentation](https://developer.apple.com/library/content/documentation/Performance/Conceptual/ManagingMemory/Articles/FindingLeaks.html).
 * A [GUI alternative](https://developer.apple.com/library/content/documentation/DeveloperTools/Conceptual/InstrumentsUserGuide/FindingLeakedMemory.html) is also available as part of Xcode.
 
+# OS X memory_history tool
+As indicated above, `leaks` has the limitation of only being able to detect memory blocks that are not referenced from any other place within the project's memory. However, that is not always the case with memory leaks. Sometimes memory is becomes exhausted due because unusued elements of some list are not deleted in time. While they are still referenced, they are no longer needed. `memory_history` allows to detect such abnormally growing structures in a similar fashion.
+
+## Usage
+
+### Test program
+Consider the following program:
+``` C#
+using System;
+using System.Diagnostics;
+
+public class DomainLeaks
+{
+    static void Main()
+    {
+        var sw = new Stopwatch();
+
+        while (true) {
+            sw.Restart();
+            Console.Write ("Iteration {0}...", i);
+            AppDomain ad = AppDomain.CreateDomain ("TestDomain");
+            AppDomain.Unload (ad);
+            sw.Stop();
+            Console.WriteLine (" {0}s", sw.ElapsedMilliseconds / 1000.0);
+        }
+    }
+}
+```
+
+### Building Mono
+Similar to `leaks` (see above), Mono needs to be built with `--with-malloc-mempools`:
+``` bash
+./autogen.sh CFLAGS='-O0 -g' --with-malloc-mempools --prefix=.../build && make -j8 && make -j8 install
+```
+
+### Running Mono
+Once Mono is built, we can run it with `MallocStackLogging=1` to start Mono with logging all memory allocations into a temporary file. Once 
+
+``` bash
+MallocStackLogging=1 .../build/bin/mono-sgen program.exe
+```
+
+
+mono-sgen(66549,0x7fff7d126000) malloc: stack logs being written into /tmp/stack-logs.66549.104843000.mono-sgen.WL16kA.index
+mono-sgen(66549,0x7fff7d126000) malloc: recording malloc and VM allocation stacks to disk using standard recorder
+Iteration 0... 1.562s
+Iteration 1... 1.02s
+...
+Iteration 526...^Z
+[1]+ Stopped MallocStackLogging=1 .../mono-sgen dom2.exe
+
+
+
 # Built-in mono profiler.
 There is a custom allocation profiler available for Mono. It allows to keep track of how much memory every function in the runtime has allocated without freeing, as well as provides different statistical data.
 
